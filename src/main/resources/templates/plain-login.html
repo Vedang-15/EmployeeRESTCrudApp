@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Custom Login Page</title>
+</head>
+<body>
+
+<h3>My Custom Login Page</h3>
+
+<form action="#" th:action="@{/authenticateTheUser}" method="POST">
+    <!-- Check for login error -->
+    <div th:if="${param.error}">
+        <i>Incorrect Username/Password</i>
+    </div>
+
+    <p>
+        User name : <input type="text" name="username" />   <!-- the name has to be "username" only as this is the default name that spring security will look for while authenticating the user-->
+        <br><br>
+        Password : <input type="password" name="password"/> <!-- same with password -->
+    </p>
+
+    <input type="submit" value="Login" />
+</form>
+
+</body>
+</html>

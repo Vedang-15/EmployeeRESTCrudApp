@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Directory</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container">
+  <br>
+  <h3>Employee Directory</h3>
+  <hr>
+
+
+  <!-- Add employee Button -->
+  <!--
+  <div sec:authorize="hasRole('MANAGER')">
+    <a th:href="@{/employees/showFormForAdd}" class="btn btn-primary btn-sm mb-3">Add Employee</a>
+  </div>
+  -->
+  <a th:href="@{/employees/showFormForAdd}" class="btn btn-primary btn-sm mb-3">Add Employee</a>
+
+  <table class="table table-bordered table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>First Name</th>
+        <th>LastName</th>
+        <th>Email</th>
+        <th>Action</th>
+
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr th:each="regEmployee : ${listOfEmployees}">
+        <td th:text = "${regEmployee.firstName}" />
+        <td th:text = "${regEmployee.lastName}" />
+        <td th:text = "${regEmployee.email}" />
+
+        <!--add update and delete button link-->
+        <td>
+
+          <!--
+          <div sec:authorize="hasRole('MANAGER')">
+            <a th:href="@{/employees/showFormForUpdate(employeeId=${regEmployee.id})}" class="btn btn-info btn-sm">Update</a>
+          </div>
+          -->
+          <a th:href="@{/employees/showFormForUpdate(employeeId=${regEmployee.id})}" class="btn btn-info btn-sm">Update</a>
+
+          <!--
+          <div sec:authorize="hasRole('ADMIN')">
+            <a th:href="@{/employees/delete(employeeId=${regEmployee.id})}" class="btn btn-danger btn-sm" onclick="if(!(confirm('Are you sure you want to delete this employee?'))) return false">Delete</a>
+          </div>
+          -->
+          <a th:href="@{/employees/delete(employeeId=${regEmployee.id})}" class="btn btn-danger btn-sm" onclick="if(!(confirm('Are you sure you want to delete this employee?'))) return false">Delete</a>
+
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+
+  <form action="#" th:action="@{/logout}" method="POST">
+    <input type="submit" value="Logout" class="btn btn-primary btn-sm mb-3"/>
+
+  </form>
+</div>
+
+</body>
+</html>
